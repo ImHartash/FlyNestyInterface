@@ -6,16 +6,17 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FlyNestyInterface
 {
     internal class API
     {
         [DllImport("FlyNestyInjector.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern bool inject();
+        private static extern bool FlyNesty_Inject();
 
         [DllImport("FlyNestyInjector.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern bool execute(string luaScript);
+        private static extern bool FlyNesty_Execute(string luaScript);
 
 
         private static String ROBLOX_APP_NAME = "RobloxPlayerBeta.exe";
@@ -37,12 +38,13 @@ namespace FlyNestyInterface
         {
             try
             {
-                bool result = inject();
+                bool result = FlyNesty_Inject();
                 isInjected = result;
                 return isInjected;
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
                 return false;
             }
         }
@@ -51,9 +53,13 @@ namespace FlyNestyInterface
         {
             try
             {
-                return execute(luaScript);
+                return FlyNesty_Execute(luaScript);
             }
-            catch { return false; }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return false; 
+            }
         }
 
         public static void setAutoInject(bool value)

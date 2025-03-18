@@ -92,7 +92,7 @@ namespace FlyNestyInterface
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
 
             return result;
@@ -109,7 +109,7 @@ namespace FlyNestyInterface
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
 
             return result;
